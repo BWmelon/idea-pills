@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import electron from 'vite-plugin-electron'
 import renderer from 'vite-plugin-electron-renderer'
 import vue from '@vitejs/plugin-vue'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -23,4 +24,17 @@ export default defineConfig({
     ]),
     renderer(),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve('./src') // 相对路径别名配置，使用 @ 代替 src
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        javascriptEnabled: true,
+        additionalData: '@import "./src/styles/variable.scss";'
+      }
+    }
+  }
 })
